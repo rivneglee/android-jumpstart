@@ -18,6 +18,38 @@
             android:adjustViewBounds="true"
             android:src="@drawable/fly_bg" />
 
+        <ImageView
+            android:id="@+id/flight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_flight_white_48dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ALG"
+            android:textColor="@color/colorWhite"
+            android:layout_alignTop="@+id/flight"
+            android:layout_toLeftOf="@+id/flight"
+            android:layout_marginRight="20dp"
+            android:gravity="start"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SFO"
+            android:textColor="@color/colorWhite"
+            android:layout_alignTop="@+id/flight"
+            android:layout_toRightOf="@+id/flight"
+            android:layout_marginLeft="20dp"
+            android:gravity="end"
+            android:textSize="30sp" />
+
         <include layout="@layout/flight_toolbar" />
     </RelativeLayout>
 
