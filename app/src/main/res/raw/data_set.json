@@ -1,0 +1,14 @@
+[
+  {
+    "start": "jfk",
+    "end": "sfo"
+  },
+  {
+    "start": "sfo",
+    "end": "jfk"
+  },
+  {
+    "start": "med",
+    "end": "app"
+  }
+]

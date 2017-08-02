@@ -1,5 +1,6 @@
 package jumpstart.android.stardust.com.jumpstart;
 
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 

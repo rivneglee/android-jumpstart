@@ -10,8 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Flowable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -24,12 +32,16 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         SearchResultsAdapter adapter = new SearchResultsAdapter();
-        List<Flight> data = new ArrayList();
-        data.add(new Flight("A", "B"));
-        data.add(new Flight("C", "D"));
-        data.add(new Flight("C", "D"));
-        data.add(new Flight("C", "D"));
-        adapter.setData(data);
+
+        Flowable.just(R.raw.data_set)
+                .map(id -> getResources().openRawResource(id))
+                .map(inputStream -> new InputStreamReader(inputStream))
+                .map(reader -> new Gson().fromJson(reader, new TypeToken<ArrayList<Flight>>(){}.getType()))
+                .subscribe(o -> {
+                    if (o instanceof ArrayList) {
+                        adapter.setData((ArrayList<Flight>) o);
+                    }
+                });
 
         recyclerView.setAdapter(adapter);
     }
@@ -91,10 +103,10 @@ public class ListActivity extends AppCompatActivity {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(itemView.getContext(), MainActivity.class);
-                    intent.putExtra("from", from.getText());
-                    intent.putExtra("to", to.getText());
-                    itemView.getContext().startActivities(new Intent[]{ intent });
+                Intent intent = new Intent(itemView.getContext(), MainActivity.class);
+                intent.putExtra("from", from.getText());
+                intent.putExtra("to", to.getText());
+                itemView.getContext().startActivities(new Intent[]{ intent });
                 }
             });
         }
